@@ -1,1 +1,8 @@
+#canvas {
+  width: '640';
+  height: '480';
+  border: 3px;
+  border-style: solid;
+}
 
+style="border:1px solid grey;"
