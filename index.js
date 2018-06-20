@@ -16,17 +16,16 @@ const Sprite = function(filename, isPattern){
     if(filename){
       this.image = new Image();
       this.image.src = filename;
-    };
-
-    if(isPattern){
-      this.pattern = context.context.createPattern(this.image, 'repeat');
+      if(isPattern){
+        this.pattern = context.context.createPattern(this.image, 'repeat');
+      }
     }
     else{
       console.log('Unable to load sprite.');
     };
 
     this.draw = function(x, y, w, h){
-      if(this.pattern != null){
+      if(this.pattern){
         context.context.fillStyle = this.pattern;
         context.context.fillRect(x, y, w, h);
       }
@@ -44,7 +43,7 @@ const Sprite = function(filename, isPattern){
       context.context.save();
       context.context.translate(x, y);
       context.context.rotate(angle * this.toRadians);
-      context.context.drawImage(this.image, -(this.image/2), -(this.height/2));
+      context.context.drawImage(this.image, -(this.image.width/2), -(this.image.height/2));
       context.context.restore();
     };
 };
@@ -54,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     context.create('canvas');
     const WALL = "http://www.tigrisgames.com/wall.png";
     const CRATE = "http://www.tigrisgames.com/crate.png";
-    const image = new Sprite(WALL, false);
-    const image2 = new Sprite(CRATE, false);
-    const pattern = new Sprite(CRATE, true);
+    let image = new Sprite(WALL, false);
+    let image2 = new Sprite(CRATE, false);
+    let pattern = new Sprite(CRATE, true);
     let angle = 0;
 
     setInterval(function(){
