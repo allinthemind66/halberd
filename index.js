@@ -20,10 +20,25 @@ const sprite = function(filename, isPattern){
 
     if(isPattern){
       this.pattern = context.context.createPattern(this.image, 'repeat');
-    }
+    };
     else{
       console.log('Unable to load sprite.');
-    }
+    };
+
+    this.draw = function(x, y, w, h){
+      if(pattern){
+        context.context.fillStyle = this.pattern;
+        context.context.fillRect(x, y, w, h);
+      }
+      else{
+        if(w != undefined || h != undefined){
+          context.context.drawImage(this.image, x, y, this.image.width, this.image.height);
+        };
+        else{
+          context.context.drawImage(this.image, x, y, w, h);
+        };
+      };
+    };
 };
 
 document.addEventListener("DOMContentLoaded", function(event) {
