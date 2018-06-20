@@ -20,7 +20,7 @@ const sprite = function(filename, isPattern){
 
     if(isPattern){
       this.pattern = context.context.createPattern(this.image, 'repeat');
-    };
+    }
     else{
       console.log('Unable to load sprite.');
     };
@@ -33,19 +33,28 @@ const sprite = function(filename, isPattern){
       else{
         if(w != undefined || h != undefined){
           context.context.drawImage(this.image, x, y, this.image.width, this.image.height);
-        };
+        }
         else{
           context.context.drawImage(this.image, x, y, w, h);
         };
       };
+    };
+
+    this.rotate = function(x, y, angle){
+      context.context.save();
+      context.context.translate(x, y);
+      context.context.rotate(angle * this.toRadians);
+      context.context.drawImage(this.image, -(this.image/2), -(this.height/2));
+      context.context.restore();
     };
 };
 
 document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
     context.create('canvas');
-    context.context.beginPath();
-    context.context.rect(0, 0, 640, 480);
-    context.context.fillStyle = 'orange';
-    context.context.fill();
+
+    // context.context.beginPath();
+    // context.context.rect(0, 0, 640, 480);
+    // context.context.fillStyle = 'orange';
+    // context.context.fill();
   });
